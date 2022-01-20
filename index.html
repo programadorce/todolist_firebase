@@ -1,15 +1,49 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="shortcut icon" href="img/todoListFavicon.png" type="image/x-icon">
+  <title>TodoList</title>
 </head>
 
 <body>
-  Thiago Soares
+  <div id="app">
+    <!-- Logotipo do TodoList-->
+    <div class="center">
+      <img src="img/todoList.png">
+    </div>
+
+    <!-- Conteúdo destinado para usuários não autorizados -->
+    <div div="auth">
+      <!-- Formulário de autenticação -->
+      <form id="authForm" class="center">
+        <h3 id="authFormTitle">Acesse a sua conta para continuar</h3>
+
+        <label for="email">E-mail:</label>
+        <input type="email" placeholder="E-mail" id="email">
+
+        <label for="password">Senha</label>
+        <input type="password" placeholder="Senha" id="password">
+
+        <button type="submit" id="submitAuthForm">Acessar</button>
+      </form>
+
+       <!-- Alterar o formulário para o cadastro de novas contas--> 
+      <p id="register">
+        Não possui uma conta?
+        <button onclick="toggleToegister()" class="alternative" >Cadastrar uma conta</button>
+      </p>
+
+       <!-- Alterar o formulário de acesso a contas--> 
+       <p id="access" class="startHidden">
+        Já possui uma conta?
+        <button onclick="toggleToAcess()" class="alternative" >Acessa conta</button>
+      </p>
+    </div>
+  </div>
 </body>
 
 </html>
