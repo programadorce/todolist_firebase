@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="img/todoListFavicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
   <title>TodoList</title>
 </head>
 
@@ -25,20 +26,20 @@
         <label for="email">E-mail:</label>
         <input type="email" placeholder="E-mail" id="email">
 
-        <label for="password">Senha</label>
+        <label for="password">Senha:</label>
         <input type="password" placeholder="Senha" id="password">
 
         <button type="submit" id="submitAuthForm">Acessar</button>
       </form>
 
        <!-- Alterar o formulário para o cadastro de novas contas--> 
-      <p id="register">
+      <p id="register" class="center">
         Não possui uma conta?
         <button onclick="toggleToegister()" class="alternative" >Cadastrar uma conta</button>
       </p>
 
-       <!-- Alterar o formulário de acesso a contas--> 
-       <p id="access" class="startHidden">
+       <!-- Alterar o formulário de acesso de contas já existentes--> 
+       <p id="access" class="startHidden center">
         Já possui uma conta?
         <button onclick="toggleToAcess()" class="alternative" >Acessa conta</button>
       </p>
