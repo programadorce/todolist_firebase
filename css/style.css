@@ -66,3 +66,12 @@ p {
   left: calc(50% - 100px);
   z-index:1;
 }
+
+.container {
+  /* Colors */
+  background-color: rgba(0, 0, 0, 0.1);
+
+  /* Rounded border */
+  border-radius: 9999px;
+}
+

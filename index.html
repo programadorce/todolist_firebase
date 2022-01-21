@@ -23,9 +23,9 @@
     </div>
 
     <!-- Conteúdo destinado para usuários não autorizados -->
-    <div div="auth">
+    <div id="auth" class="center">
       <!-- Formulário de autenticação -->
-      <form id="authForm" class="center">
+      <form id="authForm" >
         <h3 id="authFormTitle">Acesse a sua conta para continuar</h3>
 
         <label for="email">E-mail:</label>
@@ -48,6 +48,13 @@
         Já possui uma conta?
         <button onclick="toggleToAcess()" class="alternative" >Acessa conta</button>
       </p>
+    </div>
+    <div id="userContent" class="center startHidden">
+      <hr>
+      <div id="userInfo">
+        <p id="userEmail"></p>
+        <button class="alternative" onclick="signOut()">Sair</button>
+      </div>
     </div>
   </div>
   <!-- Recursos do Firebase -->
