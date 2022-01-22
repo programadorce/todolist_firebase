@@ -63,5 +63,10 @@ function showAuth(){
   showItem(auth)
 }
 
+//atributos extras de configuração
+var actionCodeSettings = {
+  url: 'http://127.0.0.1:5500/'
+}
+
 
 
