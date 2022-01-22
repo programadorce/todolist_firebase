@@ -9,6 +9,8 @@ var userContent = document.getElementById('userContent')
 var userEmail = document.getElementById('userEmail')
 var emailVerified = document.getElementById('emailVerified')
 var sendEmailVeficationDiv = document.getElementById('sendEmailVeficationDiv')
+var passwordReset = document.getElementById('passwordReset')
+
 
 
 //Alterar o formulario de autenticação para o cadastro de contas
@@ -18,6 +20,7 @@ function toggleToRegister(){
 
   hideItem(register)
   showItem(access)
+  hideItem(passwordReset)
 }
 
 //Alterar o formulario para acesso a contas já existente
@@ -27,6 +30,7 @@ function toggleToAcess(){
 
   hideItem(access)
   showItem(register)
+  showItem(passwordReset)
 }
 
 //Simplifica a exibição de elementos da página
@@ -67,6 +71,7 @@ function showAuth(){
 var actionCodeSettings = {
   url: 'http://127.0.0.1:5500/'
 }
+
 
 
 
