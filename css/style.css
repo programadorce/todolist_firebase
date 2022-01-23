@@ -80,7 +80,7 @@ p {
   margin: 4;
 }
 
-button:hover {
+#auth img:hover {
   opacity: 0.75;
 }
 

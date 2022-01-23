@@ -83,5 +83,11 @@ function signInWithGoogle(){
   })
 }
 
-
-
+function signInWithGitHub(){
+    showItem(loading)
+  firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider()).catch((error)=>{
+    alert("Houve um erro ao autenticar usando o GitHub")
+    console.log(error)
+    hideItem(loading)
+  })
+}
