@@ -10,6 +10,8 @@ var userEmail = document.getElementById('userEmail')
 var emailVerified = document.getElementById('emailVerified')
 var sendEmailVeficationDiv = document.getElementById('sendEmailVeficationDiv')
 var passwordReset = document.getElementById('passwordReset')
+var userImg = document.getElementById('userImg')
+var userName = document.getElementById('userName')
 
 
 
@@ -54,6 +56,8 @@ function showUserContent(user){
     emailVerified.innerHTML = "E-mail não verificado";
     showItem(sendEmailVeficationDiv)
   }
+  userImg.src = user.photoURL ? user.photoURL : '/img/unknownUser.png'
+  userName.innerHTML = user.displayName;
   userEmail.innerHTML = user.email
   hideItem(auth)
   showItem(userContent) 
@@ -71,6 +75,7 @@ function showAuth(){
 var actionCodeSettings = {
   url: 'http://127.0.0.1:5500/'
 }
+
 
 
 

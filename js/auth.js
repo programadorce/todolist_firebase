@@ -73,6 +73,15 @@ function sendPasswordResetEmail() {
   
 }
 
+//Função que permit a autenticação pelo Google
+function signInWithGoogle(){
+  showItem(loading)
+  firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function (error){
+    alert("Houve um erro ao autenticar usando o Google")
+    console.log(error)
+    hideItem(loading)
+  })
+}
 
 
 

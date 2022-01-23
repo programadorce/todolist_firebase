@@ -54,10 +54,17 @@
         Já possui uma conta?
         <button onclick="toggleToAcess()" class="alternative" >Acessa conta</button>
       </p>
+
+      <p>
+        Ou acesse usando: <br>
+        <img src="img/google.png" alt="Logotipo do Google" onclick="signInWithGoogle()">
+      </p>
     </div>
     <div id="userContent" class="center startHidden">
       <hr>
       <div id="userInfo">
+        <img id="userImg">
+        <p id="userName"></p>
         <p id="userEmail"></p>
         <p id="emailVerified"></p>
         <div id="sendEmailVeficationDiv">

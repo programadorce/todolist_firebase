@@ -75,3 +75,16 @@ p {
   border-radius: 9999px;
 }
 
+#auth img {
+  cursor: pointer;
+  margin: 4;
+}
+
+button:hover {
+  opacity: 0.75;
+}
+
+#userImg {
+  height: 40px;
+  border-radius: 100px;
+}
