@@ -102,4 +102,40 @@ firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider()).catch(
   hideItem(loading)
 })
 }
+//Função que permite atualiza nomes de usuários
+function updateUserName(){
+  var newUserName = prompt("Informe um novo nome de usuário.", userName.innerHTML);
+  if(newUserName && newUserName != "" ){
+    userName.innerHTML = newUserName;
+    showItem(loading)
+    firebase.auth().currentUser.updateProfile({
+      displayName: newUserName
+    }).catch( ()=> {
+      alert("Houve um erro ao atualizar seu nome")
+      console.log( error)
+    }).finally(()=>{
+      hideItem(loading)
+    })
+    
+  }else{
+    alert("O nome de usuário não pode ser vazio")
+  }
+}
 
+function deleteUser(){
+  var confirmation = confirm("Realmente deseja excluir a sua conta?")
+  if(confirmation){
+    firebase.auth().currentUser.delete().then(()=>{
+      showItem(loading)
+      alert("Usuário deletado com sucesso!!")
+    }).catch((error)=>{
+      alert("Erro ao deletar usuário")
+      console.log(error)
+    }).finally(()=>{
+      hideItem(loading)
+    })
+  }else{
+
+  }
+  
+}
