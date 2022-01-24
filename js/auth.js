@@ -83,6 +83,7 @@ function signInWithGoogle(){
   })
 }
 
+//Função que permit a autenticação pelo GitHub
 function signInWithGitHub(){
     showItem(loading)
   firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider()).catch((error)=>{
@@ -91,3 +92,14 @@ function signInWithGitHub(){
     hideItem(loading)
   })
 }
+
+//Função que permit a autenticação pelo facebook
+function signInWithFacebook(){
+  showItem(loading)
+firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider()).catch((error)=>{
+  alert("Houve um erro ao autenticar usando o Facebook")
+  console.log(error)
+  hideItem(loading)
+})
+}
+
