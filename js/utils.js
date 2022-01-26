@@ -12,6 +12,11 @@ var sendEmailVeficationDiv = document.getElementById('sendEmailVeficationDiv')
 var passwordReset = document.getElementById('passwordReset')
 var userImg = document.getElementById('userImg')
 var userName = document.getElementById('userName')
+var todoForm = document.getElementById('todoForm')
+var todoList = document.getElementById('todoList')
+var todoCount = document.getElementById('todoCount')
+var ulTodoLit = document.getElementById('ulTodoLit')
+
 
 
 
@@ -66,6 +71,9 @@ function showUserContent(user){
   userName.innerHTML = user.displayName;
   userEmail.innerHTML = user.email
   hideItem(auth)
+  dbRefUsers.child(firebase.auth().currentUser.uid).on('value', function (dataSnapshot){
+    fillTodoList(dataSnapshot)
+  })
   showItem(userContent) 
 }
 
@@ -100,6 +108,8 @@ function showError(prefix, error){
 var actionCodeSettings = {
   url: 'https://todolist-9b45f.firebaseapp.com'
 }
+
+
 
 
 
