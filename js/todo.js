@@ -70,8 +70,7 @@ function updateTodo(key) {
   var newTodoname = prompt('Escolha um novo nome para a tarefa \"' + selectedItem.innerHTML + '\".',selectedItem.innerHTML)
   if(newTodoname != ''){
     var data = {
-      name: newTodoname,
-      age: 18
+      name: newTodoname
     }
     dbRefUsers.child(firebase.auth().currentUser.uid).child(key).update(data).then(()=>{
       console.log('tarefa ' + data.name + ' atualizada com sucesso')

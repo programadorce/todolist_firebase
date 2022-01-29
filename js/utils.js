@@ -99,7 +99,9 @@ function showError(prefix, error){
     break;
     case 'auth/popup-closed-by-user': alert(prefix + '' + 'O popup de autenticação foi fechado antes da operação ser concluida')
     break;
-    
+    case 'PERMISSION_DENIED': alert(prefix + '' + 'O nome pode ter no máximo 30 caracteres')
+    break;
+
     default: alert(prefix + '' + error.message)  
   }
 }
