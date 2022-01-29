@@ -116,12 +116,14 @@ function deleteUser() {
       showItem(loading)
       alert("Usuário deletado com sucesso!!")
     }).catch((error) => {
-      showError('Falha ao remover sua conta: ', error)
+      showError('Falha ao deletar usuário: ', error)
     }).finally(() => {
       hideItem(loading)
     })
   } else {
-
+    showError('Erro ao deletar usuário: ', error)
   }
 
 }
+
+
