@@ -16,6 +16,7 @@ var todoForm = document.getElementById('todoForm')
 var todoList = document.getElementById('todoList')
 var todoCount = document.getElementById('todoCount')
 var ulTodoLit = document.getElementById('ulTodoLit')
+var search = document.getElementById('search')
 
 
 
@@ -71,10 +72,31 @@ function showUserContent(user){
   userName.innerHTML = user.displayName;
   userEmail.innerHTML = user.email
   hideItem(auth)
-  dbRefUsers.child(firebase.auth().currentUser.uid).on('value', function (dataSnapshot){
+  getDefaultTodoList()
+
+  search.onkeyup = function(){
+    if(search.value != ''){
+      //Busca tarefas filtradas somente uma vez
+      dbRefUsers.child(user.uid)
+      .orderByChild('name')
+      .startAt(search.value).endAt(search.value + '\uf8ff')
+      .once('value').then(function (dataSnapshot){
+        fillTodoList(dataSnapshot)
+      })
+    }else{
+      getDefaultTodoList()
+    }
+  }
+  showItem(userContent) 
+}
+
+//Busca tarefas em tempo real
+function getDefaultTodoList(){
+  dbRefUsers.child(firebase.auth().currentUser.uid)
+  .orderByChild('name')
+  .on('value', function (dataSnapshot){
     fillTodoList(dataSnapshot)
   })
-  showItem(userContent) 
 }
 
 //Mostrar conteúdo para usuários não autenticados
