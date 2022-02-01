@@ -6,7 +6,8 @@ todoForm.onsubmit = function (event) {
   event.preventDefault();
   if (todoForm.name.value != '') {
     var data = {
-      name: todoForm.name.value
+      name: todoForm.name.value,
+      nameLowerCase: todoForm.name.value.toLowerCase()
     }
 
     dbRefUsers.child(firebase.auth().currentUser.uid).push(data).then(function () {
@@ -70,7 +71,8 @@ function updateTodo(key) {
   var newTodoname = prompt('Escolha um novo nome para a tarefa \"' + selectedItem.innerHTML + '\".',selectedItem.innerHTML)
   if(newTodoname != ''){
     var data = {
-      name: newTodoname
+      name: newTodoname,
+      nameLowerCase: newTodoname.toLowerCase()
     }
     dbRefUsers.child(firebase.auth().currentUser.uid).child(key).update(data).then(()=>{
       console.log('tarefa ' + data.name + ' atualizada com sucesso')
