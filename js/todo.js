@@ -4,7 +4,21 @@ var dbRefUsers = database.ref('users')
 //Trata da submissão do formularios de autenticação
 todoForm.onsubmit = function (event) {
   event.preventDefault();
+  var file = todoForm.file.files[0] // Seleciona o primeiro arquivo da seleção de arquivos
   if (todoForm.name.value != '') {
+   if(file != null){ //verifica se o arquivo foi selecionado
+      if(file.type.includes('image')){//verifica se o arquivo é uma imagem
+        //Compõe nome do arquivo
+        var imgName = firebase.database().ref().push().key + '-' + file.name
+        //compõe o caminho do arquivo
+        var imgPath = 'todoListFiles /' + firebase.auth().currentUser.uid + '/' + imgName
+        //Referencia de arquivo usando o caminho criado na linha acima
+        var storageRef = firebase.storage().ref(imgPath)
+        //inicia o precesso de upload
+        storageRef.put(file) 
+      } 
+    }
+
     var data = {
       name: todoForm.name.value,
       nameLowerCase: todoForm.name.value.toLowerCase()
