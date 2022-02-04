@@ -17,7 +17,8 @@ var todoList = document.getElementById('todoList')
 var todoCount = document.getElementById('todoCount')
 var ulTodoLit = document.getElementById('ulTodoLit')
 var search = document.getElementById('search')
-
+var progressFeedback = document.getElementById('progressFeedback')
+var progress = document.getElementById('progress')
 
 
 

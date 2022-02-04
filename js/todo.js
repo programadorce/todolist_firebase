@@ -11,14 +11,18 @@ todoForm.onsubmit = function (event) {
         //Compõe nome do arquivo
         var imgName = firebase.database().ref().push().key + '-' + file.name
         //compõe o caminho do arquivo
-        var imgPath = 'todoListFiles /' + firebase.auth().currentUser.uid + '/' + imgName
+        var imgPath = 'todoListFiles/' + firebase.auth().currentUser.uid + '/' + imgName
         //Referencia de arquivo usando o caminho criado na linha acima
         var storageRef = firebase.storage().ref(imgPath)
         //inicia o precesso de upload
-        storageRef.put(file) 
-      } 
-    }
+        var upload = storageRef.put(file) 
 
+        trackUpload(upload)
+      } else{
+        alert("O arquivo selecionado precisar se uma imagem. Tente novamente")
+      }
+    }
+    
     var data = {
       name: todoForm.name.value,
       nameLowerCase: todoForm.name.value.toLowerCase()
@@ -36,6 +40,24 @@ todoForm.onsubmit = function (event) {
   }
 }
 
+
+//Rastreia o progresso de upload.
+function trackUpload(upload){
+  showItem(progressFeedback)
+    upload.on('state_changed', 
+    function(snapshot){ //Recebe informações sobre o upload
+       console.log(snapshot.bytesTransferred / snapshot.totalBytes * 100 + '%' )
+       progress.value = snapshot.bytesTransferred / snapshot.totalBytes * 100
+    }, 
+    function(error){
+      showError(error,"Falha no upload da imagem")
+    }, 
+    function(){
+      hideItem(progressFeedback)
+      console.log("Sucesso no upload")
+    }
+  )
+}
 
 //Exibir lista de tarefas de usuário
 function fillTodoList(dataSnapshot) {
