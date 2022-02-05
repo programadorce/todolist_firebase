@@ -46,17 +46,36 @@ function trackUpload(upload){
   showItem(progressFeedback)
     upload.on('state_changed', 
     function(snapshot){ //Recebe informações sobre o upload
-       console.log(snapshot.bytesTransferred / snapshot.totalBytes * 100 + '%' )
+       console.log((snapshot.bytesTransferred / snapshot.totalBytes * 100).toFixed(2) + '%' )
        progress.value = snapshot.bytesTransferred / snapshot.totalBytes * 100
     }, 
     function(error){
-      showError(error,"Falha no upload da imagem")
+      showError("Falha no upload da imagem",error)
+      hideItem(progressFeedback)
     }, 
     function(){
       hideItem(progressFeedback)
       console.log("Sucesso no upload")
     }
   )
+
+  var playPauseUpload = true; // Estado de controle do nosso upload
+  
+  idPauseBtn.onclick = function(){ //Botão pausar/continuar de upload clicado
+    playPauseUpload = !playPauseUpload //Inverte o estado do controle do ulpload
+
+    if(playPauseUpload){
+       upload.resume()
+       idPauseBtn.innerHTML = "Pausar"
+    }else{
+      upload.pause()
+      idPauseBtn.innerHTML = "Continuar"
+    }
+  } 
+  cancelBtn.onclick = function(){
+    upload.cancel()
+    alert("Upload cancelado pelo usuário")
+   }
 }
 
 //Exibir lista de tarefas de usuário

@@ -19,6 +19,8 @@ var ulTodoLit = document.getElementById('ulTodoLit')
 var search = document.getElementById('search')
 var progressFeedback = document.getElementById('progressFeedback')
 var progress = document.getElementById('progress')
+var idPauseBtn = document.getElementById('idPauseBtn')
+var cancelBtn = document.getElementById('cancelBtn')
 
 
 
@@ -124,6 +126,8 @@ function showError(prefix, error){
     case 'auth/popup-closed-by-user': alert(prefix + '' + 'O popup de autenticação foi fechado antes da operação ser concluida')
     break;
     case 'PERMISSION_DENIED': alert(prefix + '' + 'O nome pode ter no máximo 30 caracteres')
+    break;
+    case 'storage/canceled': alert(prefix + '' + 'Upload cancelado pelo usuário')
     break;
 
     default: alert(prefix + '' + error.message)  
