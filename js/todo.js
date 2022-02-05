@@ -24,13 +24,11 @@ todoForm.onsubmit = function (event) {
               name: todoForm.name.value,
               nameLowerCase: todoForm.name.value.toLowerCase()
             }
-
             dbRefUsers.child(firebase.auth().currentUser.uid).push(data).then(function () {
               console.log('Tarefa "' + data.name + '" adicionada com sucesso')
             }).catch((error) => {
               showError('Falha ao adicionar tarefa: ', error)
             })
-
             todoForm.name.value = ''
             todoForm.file.value = ''
           })
@@ -71,16 +69,13 @@ function trackUpload(upload) {
       function (snapshot) { //Recebe informações sobre o upload
         console.log((snapshot.bytesTransferred / snapshot.totalBytes * 100).toFixed(2) + '%')
         progress.value = snapshot.bytesTransferred / snapshot.totalBytes * 100
-      },
-      function (error) {
+      },function (error) {
         hideItem(progressFeedback)
         reject(error)
-      },
-      function () {
+      }, function () {
         console.log("Sucesso no upload")
         hideItem(progressFeedback)
         resolve()
-
       }
     )
 
@@ -113,9 +108,17 @@ function fillTodoList(dataSnapshot) {
   dataSnapshot.forEach(function (item) {
     var value = item.val();
     var li = document.createElement('li')
+    li.id = item.key
+
+    var imgLi = document.createElement('img')
+    imgLi.src = value.imgUrl ?  value.imgUrl : 'img/defaultTodo.png'
+    imgLi.setAttribute('class','imgTodo')
+    li.appendChild(imgLi)
+
+
     var spanLi = document.createElement('span')
     spanLi.appendChild(document.createTextNode(value.name))
-    spanLi.id = item.key
+    //spanLi.id = item.key
     li.appendChild(spanLi)
 
     var liRemoveBtn = document.createElement('button')
@@ -136,15 +139,32 @@ function fillTodoList(dataSnapshot) {
 }
 
 function removeTodo(key) {
-  var selectedItem = document.getElementById(key)
-  var confirmation = confirm('Realmente deseja remover a tarefa \"' + selectedItem.innerHTML + '\" ?')
+  var todoName = document.querySelector('#' + key + ' > span')
+  var todoImg =  document.querySelector('#' + key + ' > img')
+  var confirmation = confirm('Realmente deseja remover a tarefa \"' + todoName.innerHTML + '\" ?')
   if (confirmation) {
     dbRefUsers.child(firebase.auth().currentUser.uid).child(key).remove().then(() => {
-      console.log('tarefa ' + selectedItem.innerHTML + ' removida com sucesso')
+      console.log('tarefa ' + todoName.innerHTML + ' removida com sucesso')
+      removeFile(todoImg.src)
     }).catch((error) => {
       showError('Falha ao remove tarefa: ', error)
     })
   }
+}
+
+function removeFile(imgUrl){
+   //console.log(imgUrl)
+   var result = imgUrl.indexOf('img/defaultTodo.png')
+   if(result == -1){
+    firebase.storage().refFromURL(imgUrl).delete().then(function(){
+      console.log("Arquivo removido com sucesso")
+    }).catch(function(error){
+      console.log("Falha ao remover arquivo")
+      console.log(error)
+    })
+   }else{
+     console.log("Nenhum arquivo removido")
+   }
 }
 
 function updateTodo(key) {
