@@ -21,8 +21,8 @@ var progressFeedback = document.getElementById('progressFeedback')
 var progress = document.getElementById('progress')
 var idPauseBtn = document.getElementById('idPauseBtn')
 var cancelBtn = document.getElementById('cancelBtn')
-
-
+var cancelUpdateTodo = document.getElementById('cancelUpdateTodo')
+var todoFormTitle = document.getElementById('todoFormTitle')
 
 //Alterar o formulario de autenticação para o cadastro de contas
 function toggleToRegister(){
@@ -127,7 +127,7 @@ function showError(prefix, error){
     break;
     case 'PERMISSION_DENIED': alert(prefix + '' + 'O nome pode ter no máximo 30 caracteres')
     break;
-    case 'storage/canceled': alert(prefix + '' + 'Upload cancelado pelo usuário')
+    case 'storage/canceled':
     break;
 
     default: alert(prefix + '' + error.message)  

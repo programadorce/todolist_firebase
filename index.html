@@ -89,13 +89,18 @@
       <div class="center">
         <!--Formulário de tarefas-->
           <form id="todoForm">
-            <h3 id="tudoFormTitle">Adicionar tarefa:</h3>
+            <h3 id="todoFormTitle">Adicionar tarefa:</h3>
             <label for="name">Tarefa:</label>
             <input type="text" id="name" placeholder="Tarefa">
             <label for="img">Figura:</label>
             <input type="file" id="file" accept="image/*">
             <button type="submit" id="submitTodoForm">Adicionar tarefa</button>
           </form>
+
+          <div id="cancelUpdateTodo" class="startHidden">
+              <button onclick="confirmTodoUpadate()">Confirmar modificação</button>
+              <button class="alternative" onclick="resetTodoForm()">Cancelar modificação</button>
+          </div>
 
           <div id="progressFeedback" class="startHidden">
             <progress max="100" id="progress"></progress>
