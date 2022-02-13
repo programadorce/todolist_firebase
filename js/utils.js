@@ -97,7 +97,7 @@ function showUserContent(user){
 //Busca tarefas em tempo real
 function getDefaultTodoList(){
   dbRefUsers.child(firebase.auth().currentUser.uid)
-  .orderByChild('name')
+  .orderByChild('nameLowerCase')
   .on('value', function (dataSnapshot){
     fillTodoList(dataSnapshot)
   })
@@ -128,6 +128,8 @@ function showError(prefix, error){
     case 'PERMISSION_DENIED': alert(prefix + '' + 'O nome pode ter no máximo 30 caracteres')
     break;
     case 'storage/canceled':
+    break; 
+    case 'storage/unauthorized': alert(prefix + '' + 'Falha ao acessar o Cloud Storage')
     break;
 
     default: alert(prefix + '' + error.message)  

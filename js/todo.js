@@ -8,6 +8,11 @@ todoForm.onsubmit = function (event) {
   if (todoForm.name.value != '') {
     if (file != null) { //verifica se o arquivo foi selecionado
       if (file.type.includes('image')) {//verifica se o arquivo é uma imagem
+
+        if(file.size > 1024 * 1024 * 2){
+            alert('A imagem não pode ser maior que 2MB. Imagem selecionada tem: '+ (file.size / 1024 / 1024).toFixed(3) + ' MB' )
+            return
+        }
         //Compõe nome do arquivo
         var imgName = firebase.database().ref().push().key + '-' + file.name
         //compõe o caminho do arquivo
@@ -182,12 +187,19 @@ function resetTodoForm() {
 
 //confirma a atualização de tarefas
 function confirmTodoUpadate() {
-  hideItem(cancelUpdateTodo)
   if (todoForm.name.value != '' || file != null) {
     var todoImg = document.querySelector('#' + updateTodoKey + ' > img')
     var file = todoForm.file.files[0] // Seleciona o primeiro aquivo da seleção de aquivos
     if (file != null) { //verifica se o arquivo foi selecionado
       if (file.type.includes('image')) {//verifica se o arquivo é uma imagem
+
+        if(file.size > 1024 * 1024 * 2){
+          alert('A imagem não pode ser maior que 2MB. Imagem selecionada tem: '+ (file.size / 1024 / 1024).toFixed(3) + ' MB' )
+          return
+      }
+
+      hideItem(cancelUpdateTodo)
+      
         //Compõe nome do arquivo
         var imgName = firebase.database().ref().push().updateTodoKey + '-' + file.name
         //compõe o caminho do arquivo
@@ -247,13 +259,13 @@ function compleTodoCreate(data){
 }
 
 //completa a atualização da tarefas (persiste as informações no banco de dados)
-function completeTodoUpdate(data) {
+function completeTodoUpdate(data,imgUrl) {
   dbRefUsers.child(firebase.auth().currentUser.uid).child(updateTodoKey).update(data).then(() => {
     console.log('tarefa ' + data.name + ' atualizada com sucesso')
     if (imgUrl) {
       removeFile(todoImg.src)//Remove imagem antiga
     }
-  }).catch(() => {
+  }).catch((error) => {
     showError('Falha ao atualizar tarefa: ', error)
   })
   resetTodoForm() //Restaurar o estado inicial do formulário de tarefas
